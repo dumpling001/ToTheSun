@@ -1,0 +1,18 @@
+<%= form_for @article do |f| %>
+<% if @article.errors.any? %>
+<ul>
+  <% @article.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+</ul>
+<% end %>
+标题
+<%= f.text_field :title %>
+<br>
+叙述
+<br>
+<%= f.text_area :content %>
+<br>
+
+<%= f.submit "Submit", :disable_with => '正在努力提交正，请等待' %>
+<% end %>
