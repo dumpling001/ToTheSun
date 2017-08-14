@@ -31,6 +31,13 @@ class ArticlesController < ApplicationController
     redirect_to articles_path, notice: "厉害了亲！修改文章这么艰巨的任务都被你完成了！"
   end
 
+ def destroy
+   @article = Article.find(params[:id])
+   @article.destroy
+   flash[:alert] = "文章删掉啦！"
+   redirect_to articles_path
+ end
+
   private
 
   def article_params
