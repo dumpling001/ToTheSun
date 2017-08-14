@@ -4,6 +4,14 @@
     <hr>
     <%= form_for @article do |f| %>
 
+    <% if @article.errors.any? %>
+    <ul>
+      <% @article.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+    <% end %>
+
     标题
     <%= f.text_field :title %>
     <br>
