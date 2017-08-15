@@ -1,5 +1,7 @@
 class ArticlesController < ApplicationController
  before_action :authenticate_user! , only: [:new, :create, :edit, :update, :destroy]
+ before_action :find_article_and_check_permission, only: [:edit, :update, :destroy]
+
   def index
     @articles = Article.all
   end
@@ -24,20 +26,10 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    @article = Article.find(params[:id])
-
-    if current_user != @article.user
-      redirect_to root_path, alert: "您没有编辑权限哦！"
-    end
 
   end
 
   def update
-    @article = Article.find(params[:id])
-
-    if current_user != @article.user
-      redirect_to root_path, alert: "您没有编辑权限哦！"
-    end
 
     if @article.update(article_params)
       redirect_to articles_path, notice: "厉害了亲！修改文章这么艰巨的任务都被你完成了！"
@@ -47,18 +39,21 @@ class ArticlesController < ApplicationController
   end
 
  def destroy
-   @article = Article.find(params[:id])
-
-   if current_user != @article.user
-     redirect_to root_path, alert: "您没有编辑权限哦！"
-   end
 
    @article.destroy
-   flash[:alert] = "文章删掉啦！"
-   redirect_to articles_path
+   redirect_to articles_path, alert: "文章删掉啦！"
  end
 
   private
+
+  def find_article_and_check_permission
+    @article = Article.find(params[:id])
+
+    if current_user != @article.user
+      redirect_to root_path, alert: "您没有编辑权限哦！"
+    end
+
+  end
 
   def article_params
     params.require(:article).permit(:title, :content)
