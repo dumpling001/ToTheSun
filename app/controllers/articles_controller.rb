@@ -15,6 +15,7 @@ class ArticlesController < ApplicationController
     @article.user = current_user
 
     if @article.save
+      current_user.join!(@article)
       redirect_to articles_path
     else
       render :new
