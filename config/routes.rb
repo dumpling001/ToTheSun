@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
  namespace :account do
    resources :articles
+   resources :comments
  end
 
  root 'articles#index'

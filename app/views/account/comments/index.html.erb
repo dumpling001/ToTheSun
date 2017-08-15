@@ -1,0 +1,27 @@
+<div class="col-md-12">
+
+  <h2 class="text-center"> 我发表过的文章 </h2>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th> 内容 </th>
+        <th> 文章标题 </th>
+        <th> 最后更新 </th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @comments.each do |comment| %>
+        <tr>
+          <td> <%= comment.say %> </td>
+          <td> <%= comment.article.title %> </td>
+          <td> <%= comment.updated_at %> </td>
+          <td> <%= link_to('Edit', edit_article_comment_path(comment.article, comment), class: "btn btn-default btn-xs") %></td>
+          <td> <%= link_to('Delete', article_comment_path(comment.article, comment), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-default btn-xs") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
