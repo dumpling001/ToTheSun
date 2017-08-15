@@ -3,9 +3,11 @@
 
     <span class="pull-right">
       <% if current_user && current_user.is_member_of?(@article) %>
-        <label class="label label-success"> 群组成员 </label>
+        <label class="label label-success"> 已关注 </label>
+        <%= link_to("取消关注", quit_article_path(@article), method: :post, class: "btn btn-default") %>
       <% else %>
-        <label class="label label-warning"> 不是群组成员 </label>
+        <label class="label label-warning"> 未关注 </label>
+        <%= link_to("关注文章", join_article_path(@article), method: :post, class: "btn btn-default") %>
       <% end %>
     </span>
 

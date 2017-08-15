@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
- before_action :authenticate_user! , only: [:new, :create, :edit, :update, :destroy]
+ before_action :authenticate_user! , only: [:new, :create, :edit, :update, :destroy, :join, :quit]
  before_action :find_article_and_check_permission, only: [:edit, :update, :destroy]
 
   def index
@@ -45,6 +45,32 @@ class ArticlesController < ApplicationController
    @article.destroy
    redirect_to articles_path, alert: "文章删掉啦！"
  end
+
+  def join
+   @article = Article.find(params[:id])
+
+    if !current_user.is_member_of?(@article)
+      current_user.join!(@article)
+      flash[:notice] = "关注成功！"
+    else
+      flash[:warning] = "你已经关注了本文章！"
+    end
+
+    redirect_to article_path(@article)
+  end
+
+  def quit
+    @article = Article.find(params[:id])
+
+    if current_user.is_member_of?(@article)
+      current_user.quit!(@article)
+      flash[:alert] = "已取消关注！"
+    else
+      flash[:warning] = "你没有关注本文章，无法取消关注。"
+    end
+
+    redirect_to article_path(@article)
+  end
 
   private
 
