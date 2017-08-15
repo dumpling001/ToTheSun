@@ -1,0 +1,14 @@
+<tr>
+  <td>#</td>
+  <td><%= link_to(article.title, article_path(article)) %></td>
+  <td><%= render_article_description(article) %></td>
+  <td><%= article.user.email %></td>
+  <td>
+    <% if current_user && current_user == article.user %>
+      <%= link_to("编辑", edit_article_path(article), class: "btn btn-sm btn-default")%>
+      <%= link_to("删除", article_path(article),    class: "btn btn-sm btn-default",
+                  method: :delete, data: { confirm: "你真的要删除这篇文章吗？" } )%>
+    <% end %>
+  </td>
+
+</tr>

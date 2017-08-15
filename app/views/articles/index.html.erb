@@ -12,21 +12,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @articles.each do |article| %>
-        <tr>
-          <td>#</td>
-          <td><%= link_to(article.title, article_path(article)) %></td>
-          <td><%= render_article_description(article) %></td>
-          <td><%= article.user.email %></td>
-          <td>
-            <% if current_user && current_user == article.user %>
-              <%= link_to("Edit", edit_article_path(article), class: "btn btn-sm btn-default")%>
-              <%= link_to("Delete", article_path(article),    class: "btn btn-sm btn-default",
-                          method: :delete, data: { confirm: "真的要删除吗?" } )%>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
+      <%= render :partial => "article_item", :collection => @articles, :as => :article %>
     </tbody>
   </table>
 </div>
