@@ -6,8 +6,9 @@
     <thead>
       <tr>
         <td>#</td>
-        <td>Title</td>
-        <td>content</td>
+        <td>标题</td>
+        <td>内容</td>
+        <td>作者</td>
       </tr>
     </thead>
     <tbody>
@@ -16,6 +17,7 @@
           <td>#</td>
           <td><%= link_to(article.title, article_path(article)) %></td>
           <td><%= article.content %></td>
+          <td><%= article.user.email %></td>
           <td>
               <%= link_to("Edit", edit_article_path(article), class: "btn btn-sm btn-default")%>
               <%= link_to("Delete", article_path(article),    class: "btn btn-sm btn-default",
