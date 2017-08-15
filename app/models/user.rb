@@ -9,4 +9,7 @@ class User < ApplicationRecord
   has_many :article_relationships
   has_many :participated_articles, :through => :article_relationships, :source => :article
 
+  def is_member_of?(article)
+    participated_articles.include?(article)
+  end
 end

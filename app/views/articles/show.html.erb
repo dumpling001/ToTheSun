@@ -1,6 +1,14 @@
 <div class="col-md-12">
   <div class="article">
 
+    <span class="pull-right">
+      <% if current_user && current_user.is_member_of?(@article) %>
+        <label class="label label-success"> 群组成员 </label>
+      <% else %>
+        <label class="label label-warning"> 不是群组成员 </label>
+      <% end %>
+    </span>
+
     <%= link_to("Write a comment", new_article_comment_path(@article), class: "btn btn-default pull-right") %>
 
     <% if current_user && current_user == @article.user %>
