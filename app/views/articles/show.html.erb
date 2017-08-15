@@ -1,6 +1,8 @@
 <div class="col-md-12">
   <div class="article">
-    <%= link_to("Edit", edit_article_path(@article), class: "btn btn-primary pull-right")%>
+    <% if current_user && current_user == @ariticle.user %>
+      <%= link_to("Edit", edit_article_path(@article), class: "btn btn-primary pull-right")%>
+    <% end %>
   </div>
   <h2><%= @article.title %></h2>
   <p><%= @article.content %></p>
