@@ -16,7 +16,7 @@
         <tr>
           <td>#</td>
           <td><%= link_to(article.title, article_path(article)) %></td>
-          <td><%= simple_format(article.content) %></td>
+          <td><%= render_article_description(article) %></td>
           <td><%= article.user.email %></td>
           <td>
             <% if current_user && current_user == article.user %>
