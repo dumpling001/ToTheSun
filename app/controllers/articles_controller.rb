@@ -23,8 +23,8 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.find(params[:id])
-    @comments = @article.comments.recent
-    
+    @comments = @article.comments.recent.paginate(:page => params[:page], :per_page => 5)
+
   end
 
   def edit
